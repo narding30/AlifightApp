@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "430294274521",
+    "firebase_url": "https://alifightapp.firebaseio.com",
+    "project_id": "alifightapp",
+    "storage_bucket": "alifightapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430294274521:android:397b4cfe08d59bcc",
+        "android_client_info": {
+          "package_name": "com.example.alihfight.alifightapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430294274521-cgmetpglaeb3oi9qgi393oclm071qaph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alihfight.alifightapp",
+            "certificate_hash": "22c75aaed9e39b2f5a891edc5e8254bba08d1ab4"
+          }
+        },
+        {
+          "client_id": "430294274521-m3h8ob6vr24jplocvfsmd980th59l8ca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN9BCO1yS-4fGb59Q35iDWgteY497kMB0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430294274521-m3h8ob6vr24jplocvfsmd980th59l8ca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

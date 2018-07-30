@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#FFF"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <ImageView
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:layout_width="308dp"
+        android:layout_height="189dp"
+        android:src="@drawable/background" />
+
+    <EditText
+        android:imeOptions="actionNext"
+        android:id="@+id/et_username"
+        android:background="@drawable/et_bg"
+        android:padding="12dp"
+        android:layout_marginTop="50dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:imeOptions="actionDone"
+        android:id="@+id/et_password"
+        android:layout_marginTop="8dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:background="@drawable/et_bg"
+        android:textColorHint="#000"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textSize="17dp"
+        fontPath="fonts/RobotoCondensed-Regular.ttf"
+        android:id="@+id/btn_login"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_background_2"
+        android:text="LOGIN"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingPrefix" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Account?"
+            android:textColor="#000" />
+
+        <TextView
+            android:textSize="16dp"
+            android:layout_marginLeft="8dp"
+            fontPath="fonts/RobotoCondensed-Regular.ttf"
+            android:id="@+id/tvNoAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN UP"
+            android:textColor="#000"
+            tools:ignore="MissingPrefix" />
+    </LinearLayout>
+
+</LinearLayout>
