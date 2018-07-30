@@ -13,7 +13,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".Admin.AdminHomeActivity">
+        <activity android:name=".Admin.Activities.AdminHomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.alihfight.alifightapp.Admin;
+package com.example.alihfight.alifightapp.Admin.Fragments;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.example.alihfight.alifightapp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdminHomeFragment extends Fragment {
+public class MembersFragment extends Fragment {
 
 
-    public AdminHomeFragment() {
+    public MembersFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class AdminHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_home, container, false);
+        return inflater.inflate(R.layout.fragment_members, container, false);
     }
 
 }
