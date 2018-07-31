@@ -16,7 +16,19 @@
             android:layout_height="wrap_content"
             app:titleTextColor="@android:color/white"
             android:textAlignment="center"
-            android:background="@color/colorYellow">
+            android:background="@color/black">
+
+
+            <TextView
+                fontPath="fonts/BungeeInline-Regular.ttf"
+                tools:ignore="MissingPrefix"
+                android:text="Ali Fight Academy"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
 
         </android.support.v7.widget.Toolbar>
 
@@ -25,6 +37,8 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorHeight="3dp"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>

@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.Fragments.AdminHomeFragment">
+    tools:context=".Admin.Fragments.AdminHomeFragment"
+    android:background="#dfdfdf">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+ <LinearLayout
 
-</FrameLayout>
+     android:orientation="vertical"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+
+
+     <LinearLayout
+         android:background="#FFF"
+         android:padding="10dp"
+         android:layout_marginTop="15dp"
+         android:orientation="horizontal"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+         <ImageView
+             android:src="@drawable/background"
+             android:layout_width="50dp"
+             android:layout_height="50dp" />
+
+         <TextView
+             android:id="@+id/TVGoCreateContent"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:clickable="true"
+             android:focusable="true"
+             android:paddingStart="10dp"
+             android:paddingTop="15dp"
+             android:text="Write Something"
+             android:textColor="#000"
+             android:textSize="14sp" />
+     </LinearLayout>
+
+
+     <android.support.v7.widget.RecyclerView
+         android:id="@+id/recyclerViewHome"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+     </android.support.v7.widget.RecyclerView>
+
+
+
+ </LinearLayout>
+
+</ScrollView>

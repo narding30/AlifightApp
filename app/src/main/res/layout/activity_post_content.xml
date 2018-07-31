@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/myFrame"
+    android:background="@color/white"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.Activities.PostContentActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorYellow">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/btnBackPost"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/back1" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="7sp"
+                    android:text="Post to News Feed"
+                    android:textColor="#000"
+                    android:textSize="17dp" />
+
+                <Button
+                    android:id="@+id/btnPost"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_gravity="right"
+                    android:text="POST"
+                    android:textColor="#000" />
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_margin="10sp"
+                    android:src="@drawable/background"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="15sp"
+                        android:layout_marginTop="12sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text="Ali Fight Academy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/btnChoose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/btn_border"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/down1"
+                        android:drawablePadding="10dp"
+                        android:drawableStart="@drawable/world"
+                        android:focusable="true"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="Everyone"
+                        android:textAllCaps="false"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnCamera"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="end"
+                        android:scaleType="fitXY"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/photo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <com.example.alihfight.alifightapp.Admin.AutoResizeEditText
+                android:id="@+id/rET"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textAlignment="textStart"
+                android:hint="Write Something"
+                android:isScrollContainer="false"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:maxLength="240"
+                android:textColor="#000000"
+                android:textSize="40sp" />
+
+            <ImageView
+                android:id="@+id/IVContentImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
