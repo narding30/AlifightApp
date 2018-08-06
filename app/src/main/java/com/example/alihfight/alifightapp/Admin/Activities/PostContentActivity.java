@@ -77,7 +77,7 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
         camImage = findViewById(R.id.btnCamera);
         btnBack = findViewById(R.id.btnBackPost);
         btnChoose = findViewById(R.id.btnChoose);
-        imageView = findViewById(R.id.IVContentImage);
+        imageView = findViewById(R.id.IVContentImage1);
         btnpost = findViewById(R.id.btnPost);
         ETContent = findViewById(R.id.rET);
 
@@ -89,7 +89,7 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
         databaseReference2 = FirebaseDatabase.getInstance().getReference(("AdminNewsFeed"));
         key = databaseReference2.push().getKey();
 
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("AdminNewsFeed").child(key);
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("news_image").child(key);
 
         populateImage();
     }
@@ -99,6 +99,7 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
+                    imageView.setVisibility(View.VISIBLE);
                     final String image = dataSnapshot.child("image").getValue().toString();
 
                     if (!image.equals("default")){
@@ -137,12 +138,14 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnPost:
-                DateFormat df1 = new SimpleDateFormat("yyyy/mmm/dd");
+                DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd h:mm a");
                 final String date1 = df1.format(Calendar.getInstance().getTime());
                 DateFormat df = new SimpleDateFormat("h:mm a");
                 String date = df.format(Calendar.getInstance().getTime());
-                DateFormat df2 = new SimpleDateFormat("mmm");
+                DateFormat df2 = new SimpleDateFormat("MMM");
                 String date2 = df2.format(Calendar.getInstance().getTime());
+                DateFormat df3 = new SimpleDateFormat("dd");
+                String date4 = df3.format(Calendar.getInstance().getTime());
 
 
                 final String getContent =  ETContent.getText().toString();
@@ -157,6 +160,7 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
                         HashString1.put("DateTime", date1+ " " + date);
                         HashString1.put("time", date);
                         HashString1.put("month",date2);
+                        HashString1.put("day", date4);
                         HashString1.put("key", key);
                         HashString1.put("feedtype", getBtnText);
 
@@ -200,6 +204,7 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
                         HashString1.put("DateTime", date1+ " " + date);
                         HashString1.put("time", date);
                         HashString1.put("month",date2);
+                        HashString1.put("day", date4);
                         HashString1.put("key", key);
                         HashString1.put("feedtype", getBtnText);
 
@@ -232,7 +237,9 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
                         HashString1.put("DateTime", date1+ " " + date);
                         HashString1.put("time", date);
                         HashString1.put("month",date2);
+                        HashString1.put("day", date4);
                         HashString1.put("key", key);
+                        HashString1.put("feedtype", getBtnText);
 
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 

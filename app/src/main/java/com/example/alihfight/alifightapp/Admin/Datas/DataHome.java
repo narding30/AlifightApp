@@ -2,24 +2,26 @@ package com.example.alihfight.alifightapp.Admin.Datas;
 
 public class DataHome {
 
-    public String DateTime;
-    public String Content;
-    public String key;
-    public String time;
-    public String month;
-    public String feedtype;
+    private String DateTime;
+    private String Content;
+    private String key;
+    private String time;
+    private String month;
+    private String feedtype;
+    private String day;
 
     public DataHome(){
 
     }
 
-    public DataHome(String DateTime, String Content, String key,String time, String month, String feedtype){
+    public DataHome(String DateTime, String Content, String key,String time, String month, String feedtype, String day){
         this.DateTime = DateTime;
         this.Content = Content;
         this.key = key;
         this.time = time;
         this.month = month;
         this.feedtype = feedtype;
+        this.day = day;
     }
 
     public String getFeedtype() {

@@ -3,6 +3,7 @@ package com.example.alihfight.alifightapp.Admin.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alihfight.alifightapp.Admin.Activities.PostContentActivity;
 import com.example.alihfight.alifightapp.Admin.Datas.DataHome;
@@ -24,6 +26,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +63,7 @@ public class AdminHomeFragment extends Fragment {
         Recyclerview = view.findViewById(R.id.recyclerViewHome);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-        childRef = mDatabaseRef.child("VesselSchedule").child("Sunday").child("Departed");
+        childRef = mDatabaseRef.child("AdminNewsFeed");
 
 
         Recyclerview.setLayoutManager(linearLayoutManager);
@@ -85,19 +93,64 @@ public class AdminHomeFragment extends Fragment {
 
                 ) {
                     @Override
-                    protected void populateViewHolder(final HomeViewHolder viewHolder, DataHome model, int position) {
-                        viewHolder.tvdatetime.setText(model.getDateTime());
+                    protected void populateViewHolder(final HomeViewHolder viewHolder, final DataHome model, int position) {
+
                         viewHolder.content.setText(model.getContent());
 
+                        final Handler handler = new Handler();
+                        final int delay = 1000; //milliseconds
+
+                        handler.postDelayed(new Runnable(){
+                            public void run(){
+                                //do something
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                DateFormat df = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                String date = df.format(Calendar.getInstance().getTime());
+                                String actualTime = model.getDateTime();
+                                Date time1;
+                                Date time2;
+
+                                try {
+
+                                    time2 = format.parse(date);
+                                    time1 = format.parse(actualTime);
+
+                                    long diff = time2.getTime() - time1.getTime()  ;
+                                    long secondsInMilli = 1000;
+                                    long minutesInMilli = secondsInMilli * 60;
+                                    long hoursInMilli = minutesInMilli * 60;
+                                    long elapsedHours = diff / hoursInMilli;
+                                    diff = diff % hoursInMilli;
+                                    long elapsedMinutes = diff / minutesInMilli;
+
+
+                                    if (elapsedMinutes < 60 && elapsedHours == 0) {
+                                        viewHolder.tvdatetime.setText(elapsedMinutes + " Min(s)");
+
+                                    }else if(elapsedHours >= 1 || elapsedHours < 24){
+                                        viewHolder.tvdatetime.setText(elapsedHours+ " Hr(s)");
+                                    }else {
+                                        viewHolder.tvdatetime.setText(model.getMonth()+" "+ model.getKey() +" at "+ model.getTime());
+                                    }
+
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.postDelayed(this, delay);
+                            }
+                        }, delay);
 
 
 
-                        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("VesselImage").child(model.getKey());
+                        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("news_image").child(model.getKey());
 
                         mUserDatabase.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()){
+                                    viewHolder.imagecontent.setVisibility(View.VISIBLE);
                                     final String image = dataSnapshot.child("image").getValue().toString();
 
                                     if (!image.equals("default")){
@@ -121,6 +174,8 @@ public class AdminHomeFragment extends Fragment {
                                                     }
                                                 });
                                     }
+                                }else{
+                                    Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
