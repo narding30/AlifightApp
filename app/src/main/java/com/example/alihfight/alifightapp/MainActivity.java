@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ProgressBar mProgressBar;
     DatabaseReference databaseReference;
-    public String  userID;
+    public String userID;
 
     @Override
     protected void attachBaseContext(Context newBase) {

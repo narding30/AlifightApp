@@ -59,13 +59,14 @@ public class AdminHomeFragment extends Fragment {
 
         tvcreatecontent = view.findViewById(R.id.TVGoCreateContent);
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         Recyclerview = view.findViewById(R.id.recyclerViewHome);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
         childRef = mDatabaseRef.child("AdminNewsFeed");
 
-
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
         Recyclerview.setLayoutManager(linearLayoutManager);
 
         tvcreatecontent.setOnClickListener(new View.OnClickListener() {
