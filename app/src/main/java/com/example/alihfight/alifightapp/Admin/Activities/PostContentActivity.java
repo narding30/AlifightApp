@@ -189,7 +189,8 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
                                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
-
+                                                                        Toast.makeText(PostContentActivity.this, "Successfully Uploaded!", Toast.LENGTH_SHORT).show();
+                                                                        startActivity(new Intent(PostContentActivity.this , AdminHomeActivity.class));
                                                                     }
                                                                 });
                                                     }
@@ -225,7 +226,8 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
+                                                Toast.makeText(PostContentActivity.this, "Successfully Uploaded!", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(PostContentActivity.this , AdminHomeActivity.class));
                                             }
                                         });
                             }
@@ -257,7 +259,8 @@ public class PostContentActivity extends AppCompatActivity implements View.OnCli
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-
+                                                        Toast.makeText(PostContentActivity.this, "Successfully Uploaded!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(PostContentActivity.this , AdminHomeActivity.class));
                                                     }
                                                 });
                                     }

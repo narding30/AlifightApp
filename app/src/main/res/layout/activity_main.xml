@@ -9,6 +9,19 @@
     android:orientation="vertical"
     android:padding="15dp">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btnQr"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="end"
+            android:background="@color/transparent"
+            android:src="@drawable/qr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
     <me.zhanghai.android.materialprogressbar.MaterialProgressBar
         android:id="@+id/progressBarLogin"
         android:indeterminate="true"

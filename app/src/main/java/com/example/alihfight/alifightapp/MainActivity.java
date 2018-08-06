@@ -30,6 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -66,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.et_username);
         password = findViewById(R.id.et_password);
         mProgressBar =  findViewById(R.id.progressBarLogin);
+        btnQr = findViewById(R.id.btnQr);
+
+        btnQr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                qrScan.initiateScan();
+            }
+        });
 
 
 
@@ -165,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         userID =  currentUser.getUid();
 
-        databaseReference.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("users").child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 DataUser user = dataSnapshot.getValue(DataUser.class);
@@ -200,6 +212,50 @@ public class MainActivity extends AppCompatActivity {
         });
         mProgressBar.setVisibility(View.INVISIBLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //if qrcode has nothing in it
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+            } else {
+                //if qr contains data
+                try {
+                    //converting the data to json
+                    JSONObject obj = new JSONObject(result.getContents());
+                    //setting values to textviews
+                    String container;
+                    container = (obj.getString(""));
+
+                    if (!container.equals("login")){
+                        startActivity(new Intent(MainActivity.this, RegistrationPersonnel.class));
+                        finish();
+                    }
+                    else {
+                        Toast.makeText(this, "Invalid QR Code" , Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //if control comes here
+                    //that means the encoded format not matches
+                    //in this case you can display whatever data is available on the qrcode
+                    //to a toast
+                    String var = result.getContents();
+
+                    if (var.equals("login")){
+                        startActivity(new Intent(MainActivity.this, RegistrationPersonnel.class));
+                        finish();
+                    }else {
+                        Toast.makeText(this, "Invalid QR Code" , Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }
