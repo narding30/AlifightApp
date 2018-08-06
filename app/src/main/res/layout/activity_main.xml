@@ -9,6 +9,16 @@
     android:orientation="vertical"
     android:padding="15dp">
 
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progressBarLogin"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        app:mpb_progressStyle="horizontal"
+        android:visibility="invisible"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:layout_marginTop="70dp"
         android:layout_gravity="center_horizontal"

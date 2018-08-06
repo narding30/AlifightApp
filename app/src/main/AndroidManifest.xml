@@ -20,9 +20,12 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".Admin.Activities.AdminHomeActivity"></activity>
+        <activity android:name=".Admin.Activities.AdminHomeActivity" />
         <activity android:name=".Admin.Activities.PostContentActivity" />
-        <activity android:name=".Registration"></activity>
+        <activity android:name=".Registration" />
+        <activity android:name=".RegistrationPersonnel" />
+        <activity android:name=".Coach.PersonnelHomeActivity" />
+        <activity android:name=".User.UserHomeActivity"></activity>
     </application>
 
 </manifest>
