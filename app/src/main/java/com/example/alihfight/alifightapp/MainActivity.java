@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        if (firebaseAuth.getCurrentUser() != null) {
+            userdata();
+        }
+
         qrScan = new IntentIntegrator(this);
 
         btnlogin = findViewById(R.id.btn_login);
@@ -212,6 +216,48 @@ public class MainActivity extends AppCompatActivity {
         });
         mProgressBar.setVisibility(View.INVISIBLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void userdata(){
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        userID =  currentUser.getUid();
+
+        databaseReference.child("users").child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                DataUser user = dataSnapshot.getValue(DataUser.class);
+                if(dataSnapshot.exists()){
+
+                    String usertype = (user.getUsertype());
+
+                    if (firebaseAuth.getCurrentUser() != null) {
+                        if (usertype.equals("admin")){
+                            startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
+                        }else if (usertype.equals("personnel")){
+                            /*startActivity(new Intent(MainActivity.this, PCGHomeActivity.class));*/
+                        }else if (usertype.equals("user")){
+                            startActivity(new Intent(MainActivity.this, UserHomeActivity.class));
+                        }else if (usertype.equals("pcgstation")){
+                            /*startActivity(new Intent(MainActivity.this, PcgStationAdminHome.class));*/
+                        } else {
+                            Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                            firebaseAuth.signOut();
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        }
+                    }else {
+                        Toast.makeText(MainActivity.this, "Please, check your internet connection", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

@@ -26,6 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -167,6 +170,9 @@ public class Registration extends AppCompatActivity {
                                 String user_id = currentUser.getUid();
                                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
+                                DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                final String date1 = df1.format(Calendar.getInstance().getTime());
+
 
                                 HashMap<String, String> User = new HashMap<String, String>();
                                 User.put("FirstName", getfirstname);
@@ -179,18 +185,17 @@ public class Registration extends AppCompatActivity {
                                 User.put("Email", getEmail);
                                 User.put("Password", getpassword);
                                 User.put("usertype", "user");
+                                User.put("Time", date1);
+                                User.put("Id", user_id);
+                                User.put("Status", "Pending");
 
-                                HashMap<String, String> User1 = new HashMap<String, String>();
-                                User.put("Email", getEmail);
-                                User.put("usertype", "user");
 
 
-                                databaseReference = firebaseDatabase.getReference("users").child(user_id);
-                                databaseReference.setValue(User1);
-
-                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Profile").child(user_id);
-
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PendingMembers").child(user_id);
                                 databaseReference.setValue(User);
+
+                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("users").child(user_id);
+                                databaseReference1.setValue(User);
 
                                 Toast.makeText(Registration.this, "You've Successfully Registered", Toast.LENGTH_LONG).show();
                                 mProgressBar.setVisibility(View.INVISIBLE);

@@ -1,10 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewPending"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    tools:ignore="MissingPrefix"
+    android:background="@color/white">
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/TVTimePending"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="2 Hr(s)"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
+        <TextView
+            android:id="@+id/TVFullNamePending"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="Francis The Great Fortich"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/TVAddressPending"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:text="Ayala, Zamboanga City"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/TVOccupationPending"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:text="Student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVGenderPending"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:text="Male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/TvAgePending"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18dp"
+            android:text="19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/BTNAcceptPending"
+                android:background="@color/colorAccent"
+                android:text="Accept"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

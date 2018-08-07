@@ -131,7 +131,7 @@ public class AdminHomeFragment extends Fragment {
                                     }else if(elapsedHours >= 1 || elapsedHours < 24){
                                         viewHolder.tvdatetime.setText(elapsedHours+ " Hr(s)");
                                     }else {
-                                        viewHolder.tvdatetime.setText(model.getMonth()+" "+ model.getKey() +" at "+ model.getTime());
+                                        viewHolder.tvdatetime.setText(model.getMonth()+" "+ model.getDay() +" at "+ model.getTime());
                                     }
 
 

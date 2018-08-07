@@ -1,20 +1,29 @@
 package com.example.alihfight.alifightapp.Admin.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.alihfight.alifightapp.Admin.Fragments.AdminHomeFragment;
 import com.example.alihfight.alifightapp.Admin.Fragments.ChatFragment;
 import com.example.alihfight.alifightapp.Admin.Fragments.MembersFragment;
 import com.example.alihfight.alifightapp.Admin.Fragments.ScheduleFragment;
 import com.example.alihfight.alifightapp.Admin.Fragments.StatsFragment;
+import com.example.alihfight.alifightapp.MainActivity;
 import com.example.alihfight.alifightapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +34,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    private ImageButton imageButton;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -39,6 +48,45 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+
+        imageButton = findViewById(R.id.btnlogout);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AdminHomeActivity.this);
+                builder.setTitle("Log-out");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing but close the dialog
+                        firebaseAuth.signOut();
+                        startActivity(new Intent(AdminHomeActivity.this, MainActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+            }
+        });
 
 
         tabLayout = findViewById(R.id.tabs);
@@ -92,5 +140,26 @@ public class AdminHomeActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    boolean twice;
+    @Override
+    public void onBackPressed() {
+        if (twice == true){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+
+        Toast.makeText(this, "Please press BACK again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                twice = false;
+            }
+        }, 3000);
+        twice = true;
     }
 }

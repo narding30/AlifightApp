@@ -18,6 +18,9 @@
             android:textAlignment="center"
             android:background="@color/black">
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
                 fontPath="fonts/BungeeInline-Regular.ttf"
@@ -28,6 +31,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+
+            <ImageButton
+                android:layout_marginTop="13dp"
+                android:id="@+id/btnlogout"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="end"
+                android:background="@color/transparent"
+                android:src="@drawable/exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </FrameLayout>
 
 
         </android.support.v7.widget.Toolbar>

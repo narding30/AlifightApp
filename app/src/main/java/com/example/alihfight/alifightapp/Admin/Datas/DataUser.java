@@ -1,5 +1,7 @@
 package com.example.alihfight.alifightapp.Admin.Datas;
 
+import java.net.IDN;
+
 public class DataUser {
 
     private String usertype;
@@ -11,6 +13,9 @@ public class DataUser {
     private String LastName;
     private String MiddleName;
     private String Occupation;
+    private String Time;
+    private String Status;
+    private String Id;
 
     public DataUser(){
 
@@ -18,7 +23,7 @@ public class DataUser {
 
 
     public DataUser(String usertype, String Email, String Address, String Age, String FirstName, String Gender, String LastName,
-                    String MiddleName, String Occupation){
+                    String MiddleName, String Occupation,String Time, String Status,String Id){
         this.usertype = usertype;
         this.Email = Email;
         this.Address = Address;
@@ -28,6 +33,33 @@ public class DataUser {
         this.LastName = LastName;
         this.MiddleName = MiddleName;
         this.Occupation = Occupation;
+        this.Time = Time;
+        this.Status = Status;
+        this.Id = Id;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 
     public String getUsertype() {
