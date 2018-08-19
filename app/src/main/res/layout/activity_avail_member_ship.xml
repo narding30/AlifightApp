@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AvailMemberShipActivity">
+
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <android.support.v7.widget.Toolbar
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <TextView
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:text="Avail Membership"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:id="@+id/progressBarRegUser2"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            android:visibility="invisible"
+            app:mpb_progressStyle="horizontal" />
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@drawable/membership"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/btnApplyMem"
+            fontPath="fonts/RobotoCondensed-Regular.ttf"
+            tools:ignore="MissingPrefix"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:text="Apply MemberShip"
+            android:background="@drawable/btn_background_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

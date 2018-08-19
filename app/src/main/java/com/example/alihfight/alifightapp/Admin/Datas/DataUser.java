@@ -16,6 +16,7 @@ public class DataUser {
     private String Time;
     private String Status;
     private String Id;
+    private String MembershipFee;
 
     public DataUser(){
 
@@ -23,7 +24,7 @@ public class DataUser {
 
 
     public DataUser(String usertype, String Email, String Address, String Age, String FirstName, String Gender, String LastName,
-                    String MiddleName, String Occupation,String Time, String Status,String Id){
+                    String MiddleName, String Occupation,String Time, String Status,String Id,String MembershipFee){
         this.usertype = usertype;
         this.Email = Email;
         this.Address = Address;
@@ -36,6 +37,15 @@ public class DataUser {
         this.Time = Time;
         this.Status = Status;
         this.Id = Id;
+        this.MembershipFee = MembershipFee;
+    }
+
+    public String getMembershipFee() {
+        return MembershipFee;
+    }
+
+    public void setMembershipFee(String membershipFee) {
+        MembershipFee = membershipFee;
     }
 
     public String getId() {

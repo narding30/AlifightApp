@@ -25,7 +25,8 @@
         <activity android:name=".Registration" />
         <activity android:name=".RegistrationPersonnel" />
         <activity android:name=".Coach.PersonnelHomeActivity" />
-        <activity android:name=".User.UserHomeActivity"></activity>
+        <activity android:name=".User.UserHomeActivity" />
+        <activity android:name=".AvailMemberShipActivity"></activity>
     </application>
 
 </manifest>

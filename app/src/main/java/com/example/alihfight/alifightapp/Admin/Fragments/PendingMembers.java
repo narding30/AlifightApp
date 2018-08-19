@@ -56,7 +56,6 @@ public class PendingMembers extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_pending_members, container, false);
 
-
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         Recyclerview = view.findViewById(R.id.recyclerViewPending);
 
@@ -154,17 +153,13 @@ public class PendingMembers extends Fragment {
                                     diff = diff % hoursInMilli;
                                     long elapsedMinutes = diff / minutesInMilli;
 
-
                                     if (elapsedMinutes < 60 && elapsedHours == 0) {
                                         viewHolder.TvPendingTime.setText(elapsedMinutes + " Min(s)");
-
                                     }else if(elapsedHours >= 1 || elapsedHours < 24){
                                         viewHolder.TvPendingTime.setText(elapsedHours+ " Hr(s)");
                                     }else {
                                         viewHolder.TvPendingTime.setText(model.getTime());
                                     }
-
-
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }

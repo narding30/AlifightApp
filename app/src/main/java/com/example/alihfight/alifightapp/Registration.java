@@ -46,7 +46,6 @@ public class Registration extends AppCompatActivity {
     ImageButton back;
     Button btnreg;
     ProgressBar mProgressBar;
-    DatabaseReference databaseReference;
     FirebaseAuth mAuth;
     String mGender = null;
     RadioGroup rgGender;
@@ -168,7 +167,6 @@ public class Registration extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 FirebaseUser currentUser = mAuth.getCurrentUser();
                                 String user_id = currentUser.getUid();
-                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
                                 DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd h:mm a");
                                 final String date1 = df1.format(Calendar.getInstance().getTime());
@@ -188,21 +186,20 @@ public class Registration extends AppCompatActivity {
                                 User.put("Time", date1);
                                 User.put("Id", user_id);
                                 User.put("Status", "Pending");
+                                User.put("MembershipFee", "1000.00");
 
 
 
-                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PendingMembers").child(user_id);
-                                databaseReference.setValue(User);
 
-                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("users").child(user_id);
-                                databaseReference1.setValue(User);
-
-                                Toast.makeText(Registration.this, "You've Successfully Registered", Toast.LENGTH_LONG).show();
                                 mProgressBar.setVisibility(View.INVISIBLE);
 
                                 mAuth.signOut();
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                                startActivity(new Intent(Registration.this, MainActivity.class));
+                                Intent intent = new Intent(Registration.this, AvailMemberShipActivity.class);
+                                intent.putExtra("usersData",User);
+                                intent.putExtra("Id",user_id);
+                                startActivity(intent);
+
                             }else {
                                 mProgressBar.setVisibility(View.INVISIBLE);
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:background="@color/white"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Admin.Fragments.ApprovedMembers">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textAlignment="center"
+            android:id="@+id/ETSearchContentApproved"
+            android:inputType="text"
+            android:background="@drawable/round_corners"
+            android:layout_width="230dp"
+            android:layout_height="40dp" />
+
+        <ImageButton
+            android:id="@+id/btnSearchApproved"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="#7a2aa7"
+            android:background="@drawable/round_corners"
+            android:src="@drawable/search"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewPendingApproved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

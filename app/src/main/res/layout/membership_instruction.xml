@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/black"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/round_corners"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:layout_margin="15dp"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorYellow"
+        android:text="Instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:text="Upon completion of the registration you may proceed to the gym's cashier and pay the amount stated below. Show any ID(Identification Card) as a proof of identify so that your account will be approved in the application. Please be guided, Thanks!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+    <FrameLayout
+        android:layout_margin="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/colorYellow"
+            android:text="Membership Fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_gravity="right"
+            android:textColor="@color/colorYellow"
+            android:text="1000.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/colorYellow"
+            android:text="Total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_gravity="right"
+            android:textColor="@color/colorYellow"
+            android:text="1000.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </FrameLayout>
+
+
+
+    <Button
+        android:id="@+id/btnconfirm"
+        fontPath="fonts/RobotoCondensed-Regular.ttf"
+        android:layout_marginTop="15dp"
+        android:text="confirm"
+        android:textColor="@color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:backgroundTint="@color/colorYellow"
+        android:background="@drawable/btn_background_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingPrefix" />
+
+</LinearLayout>
