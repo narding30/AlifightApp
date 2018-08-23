@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.Activities.SetScheduleDataActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:background="@color/colorYellow"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+
+        <Button
+            android:id="@+id/btnBackRegVessel"
+            android:padding="5dp"
+            android:layout_marginRight="25dp"
+            android:drawableStart="@drawable/back1"
+            android:background="@color/transparent"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="Register Session"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_marginTop="40dp"
+        fontPath="fonts/Lato-Bold.ttf"
+        android:text="Please Fill in the Following fields"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingPrefix" />
+
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColorHint="@color/black">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ETSessionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Session Title"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textColorHint="@android:color/white" />
+
+    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:textColorHint="@color/black">
+
+        <android.support.design.widget.TextInputEditText
+            android:inputType="number"
+            android:id="@+id/ETSessionCapacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Session Capacity"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textColor="@color/colorYellow"
+            android:textColorHint="@android:color/white" />
+
+    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColorHint="@color/black">
+
+            <android.support.design.widget.TextInputEditText
+                android:inputType="number"
+                android:id="@+id/ETCountDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Session Days Per Week"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textColor="@color/colorYellow"
+                android:textColorHint="@android:color/white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnnextRegSession"
+            fontPath="fonts/RobotoCondensed-Regular.ttf"
+            android:textSize="22dp"
+            android:textColor="@color/colorYellow"
+            android:text="NEXT"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_background_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingPrefix" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

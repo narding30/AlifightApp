@@ -54,7 +54,7 @@ public class ApprovedMembers extends Fragment {
         Recyclerview = view.findViewById(R.id.recyclerViewPendingApproved);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
-        childRef = mDatabaseRef.child("PendingMembers");
+        childRef = mDatabaseRef.child("ApprovedMembers");
 
         searchcontent = view.findViewById(R.id.ETSearchContentApproved);
         searchBtn = view.findViewById(R.id.btnSearchApproved);
@@ -87,14 +87,141 @@ public class ApprovedMembers extends Fragment {
                         R.layout.pendingmembers_listrow,
                         PendingMembersViewHolder.class,
                         firebaseSearchQuery
+
                 ) {
                     @Override
                     protected void populateViewHolder(final PendingMembersViewHolder viewHolder, final DataUser model, int position) {
 
+                        viewHolder.TvFullName.setText(model.getLastName()+ ", " + model.getFirstName()+ " " + model.getMiddleName());
+                        viewHolder.TvAddress.setText(model.getAddress());
+                        viewHolder.TvGender.setText(model.getGender());
+                        viewHolder.TvAge.setText(model.getAge());
+                        viewHolder.TvOccupation.setText(model.getOccupation());
+
+                        viewHolder.BtnApprove.setVisibility(View.GONE);
+
+
+                        final Handler handler = new Handler();
+                        final int delay = 1000; //milliseconds
+
+                        handler.postDelayed(new Runnable(){
+                            public void run(){
+                                //do something
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                DateFormat df = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                String date = df.format(Calendar.getInstance().getTime());
+                                String actualTime = model.getTime();
+                                Date time1;
+                                Date time2;
+
+                                try {
+
+                                    time2 = format.parse(date);
+                                    time1 = format.parse(actualTime);
+
+                                    long diff = time2.getTime() - time1.getTime()  ;
+                                    long secondsInMilli = 1000;
+                                    long minutesInMilli = secondsInMilli * 60;
+                                    long hoursInMilli = minutesInMilli * 60;
+                                    long elapsedHours = diff / hoursInMilli;
+                                    diff = diff % hoursInMilli;
+                                    long elapsedMinutes = diff / minutesInMilli;
+
+
+                                    if (elapsedMinutes < 60 && elapsedHours == 0) {
+                                        viewHolder.TvPendingTime.setText(elapsedMinutes + " Min(s)");
+
+                                    }else if(elapsedHours >= 1 || elapsedHours < 24){
+                                        viewHolder.TvPendingTime.setText(elapsedHours+ " Hr(s)");
+                                    }else {
+                                        viewHolder.TvPendingTime.setText(model.getTime());
+                                    }
+
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.postDelayed(this, delay);
+                            }
+                        }, delay);
 
                     }
                 };
         Recyclerview.setAdapter(firebaseRecyclerAdapter);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder>(
+
+                        DataUser.class,
+                        R.layout.pendingmembers_listrow,
+                        PendingMembersViewHolder.class,
+                        childRef
+                ) {
+                    @Override
+                    protected void populateViewHolder(final PendingMembersViewHolder viewHolder, final DataUser model, int position) {
+
+                        viewHolder.TvFullName.setText(model.getLastName()+ ", " + model.getFirstName()+ " " + model.getMiddleName());
+                        viewHolder.TvAddress.setText(model.getAddress());
+                        viewHolder.TvGender.setText(model.getGender());
+                        viewHolder.TvAge.setText(model.getAge());
+                        viewHolder.TvOccupation.setText(model.getOccupation());
+
+                        viewHolder.BtnApprove.setVisibility(View.GONE);
+
+
+                        final Handler handler = new Handler();
+                        final int delay = 1000; //milliseconds
+
+                        handler.postDelayed(new Runnable(){
+                            public void run(){
+                                //do something
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                DateFormat df = new SimpleDateFormat("yyyy/MM/dd h:mm a");
+                                String date = df.format(Calendar.getInstance().getTime());
+                                String actualTime = model.getTime();
+                                Date time1;
+                                Date time2;
+
+                                try {
+
+                                    time2 = format.parse(date);
+                                    time1 = format.parse(actualTime);
+
+                                    long diff = time2.getTime() - time1.getTime()  ;
+                                    long secondsInMilli = 1000;
+                                    long minutesInMilli = secondsInMilli * 60;
+                                    long hoursInMilli = minutesInMilli * 60;
+                                    long elapsedHours = diff / hoursInMilli;
+                                    diff = diff % hoursInMilli;
+                                    long elapsedMinutes = diff / minutesInMilli;
+
+
+                                    if (elapsedMinutes < 60 && elapsedHours == 0) {
+                                        viewHolder.TvPendingTime.setText(elapsedMinutes + " Min(s)");
+
+                                    }else if(elapsedHours >= 1 || elapsedHours < 24){
+                                        viewHolder.TvPendingTime.setText(elapsedHours+ " Hr(s)");
+                                    }else {
+                                        viewHolder.TvPendingTime.setText(model.getTime());
+                                    }
+
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.postDelayed(this, delay);
+                            }
+                        }, delay);
+
+                    }
+                };
+        Recyclerview.setAdapter(firebaseRecyclerAdapter);
+    }
 }

@@ -41,6 +41,7 @@
             android:text="Francis The Great Fortich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/TVAddressPending"
             android:layout_gravity="center_horizontal"
@@ -48,6 +49,7 @@
             android:text="Ayala, Zamboanga City"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/TVOccupationPending"
             android:layout_gravity="center_horizontal"
@@ -63,6 +65,7 @@
             android:text="Male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/TvAgePending"
             android:layout_gravity="center_horizontal"

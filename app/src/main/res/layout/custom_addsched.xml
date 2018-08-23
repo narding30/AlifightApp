@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/colorYellow"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    xmlns:float="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center">
+
+    <LinearLayout
+        android:gravity="center"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:text="Add Schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        float:fletTextAppearance="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/white"
+            android:id="@+id/ETDay"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="false"
+            android:textColorHint="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Day of Session" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            float:fletTextAppearance="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/white"
+                android:id="@+id/ETInstructor"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:focusable="false"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Instructor Name" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            float:fletTextAppearance="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/white"
+                android:id="@+id/ETStartTime"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:focusable="false"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Start Time" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            float:fletTextAppearance="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:textColor="@color/white"
+                android:id="@+id/ETEndTime"
+                android:textAlignment="center"
+                android:clickable="true"
+                android:focusable="false"
+                android:textColorHint="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="End Time" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
+        <Button
+            android:layout_marginBottom="10dp"
+            android:id="@+id/btnSaveSched"
+            fontPath="fonts/RobotoCondensed-Regular.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_background_2"
+            android:text="Save"
+            android:textColor="@android:color/white"
+            android:textSize="17dp"
+            tools:ignore="MissingPrefix" />
+
+    </LinearLayout>
+
+</LinearLayout>

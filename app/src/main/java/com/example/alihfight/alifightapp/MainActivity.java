@@ -1,9 +1,11 @@
 package com.example.alihfight.alifightapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.alihfight.alifightapp.Admin.Activities.AdminHomeActivity;
 import com.example.alihfight.alifightapp.Admin.Datas.DataUser;
-import com.example.alihfight.alifightapp.User.UserHomeActivity;
+import com.example.alihfight.alifightapp.User.Activities.UserHomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -188,21 +190,41 @@ public class MainActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
 
                     String usertype = (user.getUsertype());
+                    String userStatus = (user.getStatus());
 
                     if (firebaseAuth.getCurrentUser() != null) {
-                        if (usertype.equals("admin")){
-                            startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
-                        }else if (usertype.equals("personnel")){
-                            /*startActivity(new Intent(MainActivity.this, PCGHomeActivity.class));*/
-                        }else if (usertype.equals("user")){
-                            startActivity(new Intent(MainActivity.this, UserHomeActivity.class));
-                        }else if (usertype.equals("pcgstation")){
-                            /*startActivity(new Intent(MainActivity.this, PcgStationAdminHome.class));*/
-                        } else {
-                            Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
-                            firebaseAuth.signOut();
-                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        if (userStatus.equals("Pending")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("Notice!");
+                            builder.setMessage("This account has yet to be approved, please contact the administrator for addition information.");
+
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing but close the dialog
+                                    dialog.dismiss();
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+
+                        }else {
+
+                            if (usertype.equals("admin")){
+                                startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
+                            }else if (usertype.equals("personnel")){
+                                /*startActivity(new Intent(MainActivity.this, PCGHomeActivity.class));*/
+                            }else if (usertype.equals("user")){
+                                startActivity(new Intent(MainActivity.this, UserHomeActivity.class));
+                            }else if (usertype.equals("pcgstation")){
+                                /*startActivity(new Intent(MainActivity.this, PcgStationAdminHome.class));*/
+                            } else {
+                                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                                firebaseAuth.signOut();
+                                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            }
                         }
+
                     }else {
                         Toast.makeText(MainActivity.this, "Please, check your internet connection", Toast.LENGTH_LONG).show();
                     }
@@ -277,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
                     container = (obj.getString(""));
 
                     if (!container.equals("login")){
-                        startActivity(new Intent(MainActivity.this, RegistrationPersonnel.class));
+                        startActivity(new Intent(MainActivity.this, CoachRegistration.class));
                         finish();
                     }
                     else {
@@ -292,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
                     String var = result.getContents();
 
                     if (var.equals("login")){
-                        startActivity(new Intent(MainActivity.this, RegistrationPersonnel.class));
+                        startActivity(new Intent(MainActivity.this, CoachRegistration.class));
                         finish();
                     }else {
                         Toast.makeText(this, "Invalid QR Code" , Toast.LENGTH_LONG).show();

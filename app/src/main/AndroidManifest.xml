@@ -24,9 +24,12 @@
         <activity android:name=".Admin.Activities.PostContentActivity" />
         <activity android:name=".Registration" />
         <activity android:name=".RegistrationPersonnel" />
-        <activity android:name=".Coach.PersonnelHomeActivity" />
-        <activity android:name=".User.UserHomeActivity" />
-        <activity android:name=".AvailMemberShipActivity"></activity>
+        <activity android:name=".Coach.Activities.PersonnelHomeActivity" />
+        <activity android:name=".User.Activities.UserHomeActivity" />
+        <activity android:name=".AvailMemberShipActivity" />
+        <activity android:name=".Admin.Activities.AddScheduleActivity" />
+        <activity android:name=".Admin.Activities.SetScheduleDataActivity" />
+        <activity android:name=".CoachRegistration"></activity>
     </application>
 
 </manifest>

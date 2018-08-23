@@ -203,7 +203,6 @@ public class PendingMembers extends Fragment {
     public void onStart() {
         super.onStart();
 
-
         FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder>(
 

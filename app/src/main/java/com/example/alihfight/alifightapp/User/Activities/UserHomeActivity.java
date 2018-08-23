@@ -1,4 +1,4 @@
-package com.example.alihfight.alifightapp.Admin.Activities;
+package com.example.alihfight.alifightapp.User.Activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +23,10 @@ import com.example.alihfight.alifightapp.Admin.Fragments.ScheduleFragment;
 import com.example.alihfight.alifightapp.Admin.Fragments.StatsFragment;
 import com.example.alihfight.alifightapp.MainActivity;
 import com.example.alihfight.alifightapp.R;
+import com.example.alihfight.alifightapp.User.Fragments.ChatFragmentUser;
+import com.example.alihfight.alifightapp.User.Fragments.NewsFragmentUser;
+import com.example.alihfight.alifightapp.User.Fragments.ProfileFragmentUser;
+import com.example.alihfight.alifightapp.User.Fragments.ScheduleFragmentUser;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class AdminHomeActivity extends AppCompatActivity {
+public class UserHomeActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -44,19 +48,20 @@ public class AdminHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_home);
+        setContentView(R.layout.activity_user_home);
 
-        viewPager = findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tabsUser);
+        viewPager = findViewById(R.id.viewpagerUser);
         setupViewPager(viewPager);
 
-        imageButton = findViewById(R.id.btnlogout);
+        imageButton = findViewById(R.id.btnlogoutUser);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(AdminHomeActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(UserHomeActivity.this);
                 builder.setTitle("Log-out");
                 builder.setMessage("Are you sure?");
 
@@ -65,7 +70,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
                         firebaseAuth.signOut();
-                        startActivity(new Intent(AdminHomeActivity.this, MainActivity.class));
+                        startActivity(new Intent(UserHomeActivity.this, MainActivity.class));
                         dialog.dismiss();
                     }
                 });
@@ -83,11 +88,13 @@ public class AdminHomeActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
 
+
+
             }
         });
 
 
-        tabLayout = findViewById(R.id.tabs);
+
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
     }
@@ -95,19 +102,17 @@ public class AdminHomeActivity extends AppCompatActivity {
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.newspaper);
-        tabLayout.getTabAt(1).setIcon(R.drawable.member);
-        tabLayout.getTabAt(2).setIcon(R.drawable.chat);
-        tabLayout.getTabAt(3).setIcon(R.drawable.stats);
-        tabLayout.getTabAt(4).setIcon(R.drawable.calendar);
+        tabLayout.getTabAt(1).setIcon(R.drawable.chat);
+        tabLayout.getTabAt(2).setIcon(R.drawable.calendar);
+        tabLayout.getTabAt(3).setIcon(R.drawable.profileicon);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new AdminHomeFragment(), "");
-        adapter.addFragment(new MembersFragment(), "");
-        adapter.addFragment(new ChatFragment(), "");
-        adapter.addFragment(new StatsFragment(), "");
-        adapter.addFragment(new ScheduleFragment(), "");
+        adapter.addFragment(new NewsFragmentUser(), "");
+        adapter.addFragment(new ChatFragmentUser(), "");
+        adapter.addFragment(new ScheduleFragmentUser(), "");
+        adapter.addFragment(new ProfileFragmentUser(), "");
         viewPager.setAdapter(adapter);
     }
 
