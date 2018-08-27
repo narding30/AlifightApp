@@ -41,9 +41,39 @@
 
         <ImageView
             android:scaleType="fitXY"
-            android:src="@drawable/membership"
+            android:src="@drawable/zaq"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="250dp" />
+
+        <EditText
+            android:clickable="true"
+            android:focusable="false"
+            android:id="@+id/ETPackage"
+            android:textSize="19dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:hint="Select Package"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:clickable="true"
+            android:focusable="false"
+            android:id="@+id/ETSession"
+            android:textSize="19dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"
+            android:hint="Select Session"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
 
         <Button
             android:layout_margin="10dp"

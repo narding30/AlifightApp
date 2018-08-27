@@ -65,11 +65,36 @@
 
         <TextView
             android:textColor="@color/colorYellow"
+            android:text="Session Fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVsessionFee"
+            android:layout_gravity="right"
+            android:textColor="@color/colorYellow"
+            android:text="1000.00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/colorYellow"
             android:text="Total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/TVTotal"
             android:layout_gravity="right"
             android:textColor="@color/colorYellow"
             android:text="1000.00"

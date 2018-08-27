@@ -176,7 +176,6 @@ public class AdminHomeFragment extends Fragment {
                                                 });
                                     }
                                 }else{
-                                    Toast.makeText(getContext(), "Failed!", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -186,9 +185,6 @@ public class AdminHomeFragment extends Fragment {
 
                             }
                         });
-
-
-
 
                     }
                 };

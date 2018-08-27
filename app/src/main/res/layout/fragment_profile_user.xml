@@ -1,14 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User.Fragments.ProfileFragmentUser">
+    tools:context=".User.Fragments.ProfileFragmentUser"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageView
+
+            android:background="@drawable/qq"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/IVProfileImage"
+            android:src="@drawable/russel"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+    </FrameLayout>
+
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/TVNameProfile"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"
+        android:text="Russel Crow"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="17dp"
+        android:text="Details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Age: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVAgeProfile"
+            android:textSize="18dp"
+            android:text="23"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Sex:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVSexProfile"
+            android:textSize="18dp"
+            android:text="Male"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Address:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVAddressProfile"
+            android:textSize="18dp"
+            android:text="Tetuan, Zamboanga City"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Occupation:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVOccupationProfile"
+            android:textSize="18dp"
+            android:text="Student"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Contact Number:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVContactNumProfile"
+            android:textSize="18dp"
+            android:text="09165526466"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Session Availed:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVSessionProfile"
+            android:textSize="18dp"
+            android:text="Judo"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:text="Sessions Left:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/TVSessionsLeftProfile"
+            android:textSize="18dp"
+            android:text="10"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <View
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>

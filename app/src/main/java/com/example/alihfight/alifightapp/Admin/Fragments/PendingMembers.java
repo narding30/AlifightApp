@@ -113,6 +113,14 @@ public class PendingMembers extends Fragment {
                             @Override
                             public void onClick(View view) {
 
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                        .getReference("users");
+
+                                databaseReference
+                                        .child(model.getId())
+                                        .child("Status")
+                                        .setValue("Approved");
+
                                 DatabaseReference From = FirebaseDatabase.getInstance()
                                         .getReference("PendingMembers")
                                         .child(model.getId());
@@ -224,6 +232,14 @@ public class PendingMembers extends Fragment {
                             @Override
                             public void onClick(View view) {
 
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                        .getReference("users");
+
+                                databaseReference
+                                        .child(model.getId())
+                                        .child("Status")
+                                        .setValue("Approved");
+
                                 DatabaseReference From = FirebaseDatabase.getInstance()
                                         .getReference("PendingMembers")
                                         .child(model.getId());
@@ -289,7 +305,7 @@ public class PendingMembers extends Fragment {
     }
 
     private void novalue(){
-        FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder> firebaseRecyclerAdapter =
+        final FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<DataUser, PendingMembersViewHolder>(
 
                         DataUser.class,
@@ -309,6 +325,14 @@ public class PendingMembers extends Fragment {
                         viewHolder.BtnApprove.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                        .getReference("users");
+
+                                databaseReference
+                                        .child(model.getId())
+                                        .child("Status")
+                                        .setValue("Approved");
 
                                 DatabaseReference From = FirebaseDatabase.getInstance()
                                         .getReference("PendingMembers")

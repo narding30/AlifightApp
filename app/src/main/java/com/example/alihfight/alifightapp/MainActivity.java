@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.alihfight.alifightapp.Admin.Activities.AdminHomeActivity;
 import com.example.alihfight.alifightapp.Admin.Datas.DataUser;
+import com.example.alihfight.alifightapp.Coach.Activities.PersonnelHomeActivity;
 import com.example.alihfight.alifightapp.User.Activities.UserHomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -213,11 +214,9 @@ public class MainActivity extends AppCompatActivity {
                             if (usertype.equals("admin")){
                                 startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
                             }else if (usertype.equals("personnel")){
-                                /*startActivity(new Intent(MainActivity.this, PCGHomeActivity.class));*/
+                                startActivity(new Intent(MainActivity.this, PersonnelHomeActivity.class));
                             }else if (usertype.equals("user")){
                                 startActivity(new Intent(MainActivity.this, UserHomeActivity.class));
-                            }else if (usertype.equals("pcgstation")){
-                                /*startActivity(new Intent(MainActivity.this, PcgStationAdminHome.class));*/
                             } else {
                                 Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                                 firebaseAuth.signOut();
@@ -254,26 +253,43 @@ public class MainActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
 
                     String usertype = (user.getUsertype());
+                    String userStatus = (user.getStatus());
 
                     if (firebaseAuth.getCurrentUser() != null) {
-                        if (usertype.equals("admin")){
-                            startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
-                        }else if (usertype.equals("personnel")){
-                            /*startActivity(new Intent(MainActivity.this, PCGHomeActivity.class));*/
-                        }else if (usertype.equals("user")){
-                            startActivity(new Intent(MainActivity.this, UserHomeActivity.class));
-                        }else if (usertype.equals("pcgstation")){
-                            /*startActivity(new Intent(MainActivity.this, PcgStationAdminHome.class));*/
+
+                        if (userStatus.equals("Pending")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("Notice!");
+                            builder.setMessage("This account has yet to be approved, please contact the administrator for addition information.");
+
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing but close the dialog
+                                    dialog.dismiss();
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+
                         } else {
-                            Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
-                            firebaseAuth.signOut();
-                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            if (usertype.equals("admin")) {
+                                startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
+                            } else if (usertype.equals("personnel")) {
+                                startActivity(new Intent(MainActivity.this, PersonnelHomeActivity.class));
+                            } else if (usertype.equals("user")) {
+                                startActivity(new Intent(MainActivity.this, UserHomeActivity.class));
+                            } else {
+                                Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                                firebaseAuth.signOut();
+                                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            }
                         }
-                    }else {
-                        Toast.makeText(MainActivity.this, "Please, check your internet connection", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Please, check your internet connection", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
