@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -126,16 +129,36 @@ public class SetScheduleDataActivity extends AppCompatActivity implements View.O
 
                             }else {
 
+                                DateFormat df = new SimpleDateFormat("h:mm a");
+                                String date = df.format(Calendar.getInstance().getTime());
+
                                 HashMap<String, String> HashString = new HashMap<String, String>();
                                 HashString.put("SessionName", getTitle);
                                 HashString.put("SessionCapacity", getCap);
                                 HashString.put("SessionsPerWeek", getDays);
 
                                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Sessions");
-
-
                                 databaseReference.child(getTitle)
                                         .setValue(HashString);
+
+
+                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("GroupChatHeader");
+                                String key = databaseReference1.child(getTitle).push().getKey();
+
+                                HashMap<String, String> HashString1 = new HashMap<String, String>();
+                                HashString1.put("Time", date);
+                                HashString1.put("SessionName", getTitle);
+                                HashString1.put("MessageStatus", "unread");
+                                HashString1.put("Key", key);
+
+                                databaseReference1.child(getTitle)
+                                        .child(key)
+                                        .setValue(HashString1);
+
+                                DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("AdminGroupChatHeader");
+
+                                databaseReference3.child(getTitle)
+                                        .setValue(HashString1);
 
                                 Intent myIntent = new Intent(SetScheduleDataActivity.this, AddScheduleActivity.class);
                                 myIntent.putExtra("SessionName", getTitle);

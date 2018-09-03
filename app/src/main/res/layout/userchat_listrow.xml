@@ -31,12 +31,14 @@
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:layout_marginStart="25dp"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:text="Judo Group Chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:visibility="gone"
+                android:id="@+id/TVChatStatus"
                 android:layout_marginStart="25dp"
                 android:text="New message has arrived."
                 android:layout_width="wrap_content"
@@ -47,7 +49,7 @@
         <TextView
             android:id="@+id/TVChatTime"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_gravity="right"
             android:text="10:30"
             android:layout_width="wrap_content"

@@ -103,7 +103,7 @@ public class PersonnelHomeActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.newspaper);
         tabLayout.getTabAt(1).setIcon(R.drawable.calendar);
         tabLayout.getTabAt(2).setIcon(R.drawable.chat);
-        tabLayout.getTabAt(4).setIcon(R.drawable.profileicon);
+        tabLayout.getTabAt(3).setIcon(R.drawable.profileicon);
 
     }
 

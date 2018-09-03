@@ -49,6 +49,7 @@ public class Registration extends AppCompatActivity {
     FirebaseAuth mAuth;
     String mGender = null;
     RadioGroup rgGender;
+    EditText contact;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -71,6 +72,7 @@ public class Registration extends AppCompatActivity {
         password = findViewById(R.id.etpass);
         email = findViewById(R.id.etemail);
         rgGender =  findViewById(R.id.rgGenderUser);
+        contact = findViewById(R.id.tvcontact);
 
         back = findViewById(R.id.btnBackRegUser);
         btnreg = findViewById(R.id.btnRegisterUser);
@@ -138,6 +140,7 @@ public class Registration extends AppCompatActivity {
         final String getOccupation = occupation.getText().toString().trim();
         final String getpassword = password.getText().toString().trim();
         final String getEmail = email.getText().toString().trim();
+        final String getContact = contact.getText().toString().trim();
 
 
         if (TextUtils.isEmpty(getlastname) ||
@@ -147,7 +150,8 @@ public class Registration extends AppCompatActivity {
                 TextUtils.isEmpty(getAddress) ||
                 TextUtils.isEmpty(getOccupation) ||
                 TextUtils.isEmpty(getpassword) ||
-                TextUtils.isEmpty(getEmail)){
+                TextUtils.isEmpty(getEmail) ||
+                TextUtils.isEmpty(getContact)){
 
             mProgressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(), "Fields must not be empty", Toast.LENGTH_SHORT).show();
@@ -187,6 +191,7 @@ public class Registration extends AppCompatActivity {
                                 User.put("Id", user_id);
                                 User.put("Status", "Pending");
                                 User.put("MembershipFee", "1000.00");
+                                User.put("Contact", getContact);
 
 
 

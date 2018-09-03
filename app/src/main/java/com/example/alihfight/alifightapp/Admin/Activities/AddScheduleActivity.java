@@ -509,8 +509,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
                         }else {
 
-                            DateFormat df = new SimpleDateFormat("h:mm a");
-                            String date = df.format(Calendar.getInstance().getTime());
+
                             FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
                             DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference(("SessionSchedule"));
                             String key = databaseReference2.child(getday).push().getKey();
@@ -526,10 +525,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                             HashString.put("Key", key);
 
 
-                            HashMap<String, String> HashString1 = new HashMap<String, String>();
-                            HashString.put("Time", date);
-                            HashString.put("SessionName", SessionName);
-                            HashString.put("MessageStatus", "unread");
+
 
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(SessionName+"DaysSched");
                             databaseReference.child(key).setValue(HashString);

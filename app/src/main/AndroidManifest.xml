@@ -29,7 +29,8 @@
         <activity android:name=".AvailMemberShipActivity" />
         <activity android:name=".Admin.Activities.AddScheduleActivity" />
         <activity android:name=".Admin.Activities.SetScheduleDataActivity" />
-        <activity android:name=".CoachRegistration"></activity>
+        <activity android:name=".CoachRegistration" />
+        <activity android:name=".User.Activities.ChatActivity"></activity>
     </application>
 
 </manifest>
