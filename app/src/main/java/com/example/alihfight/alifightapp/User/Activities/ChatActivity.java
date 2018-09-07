@@ -119,13 +119,11 @@ public class ChatActivity extends AppCompatActivity {
 
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
-
             databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     if (dataSnapshot.exists()){
-
                         String getUserType;
 
                         getUserType =  dataSnapshot.child("usertype").getValue().toString();

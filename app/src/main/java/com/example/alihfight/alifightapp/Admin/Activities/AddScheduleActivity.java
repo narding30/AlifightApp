@@ -45,9 +45,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -356,6 +358,11 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 final EditText ETTimeEnd = dialogView.findViewById(R.id.ETEndTime);
 
                 Button btnAddSched = dialogView.findViewById(R.id.btnSaveSched);
+                String getETTimeStart = ETTimeStart.getText().toString();
+                String getETTimeEnd = ETTimeEnd.getText().toString();
+                if (!TextUtils.isEmpty(getETTimeStart )&& !TextUtils.isEmpty(getETTimeEnd)){
+
+                }
 
 
 
@@ -421,6 +428,9 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                         calendar = Calendar.getInstance();
                         CalendarHour = calendar.get(Calendar.HOUR_OF_DAY);
                         CalendarMinute = calendar.get(Calendar.MINUTE);
+
+
+                         final int addtime = 2;
                         timepickerdialog = new TimePickerDialog(AddScheduleActivity.this,
                                 new TimePickerDialog.OnTimeSetListener() {
                                     @Override
@@ -444,62 +454,54 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                                         }
                                         if (minute < 10){
                                             ETTimeStart.setText(hourOfDay + ":0" + minute + " " + format);
+
+                                            int gettotaltime = hourOfDay+addtime;
+
+                                            if (gettotaltime >= 10 ){
+                                                if (format.equals("PM") && minute > 0){
+                                                    Toast.makeText(AddScheduleActivity.this, "Sorry, the time end is later than our business time.", Toast.LENGTH_SHORT).show();
+                                                    ETTimeStart.setText("");
+                                                    ETTimeEnd.setText("");
+                                                } else {
+                                                    ETTimeEnd.setText(gettotaltime + ":0" + minute + "" + format);
+                                                }
+                                            }else {
+                                                ETTimeEnd.setText(gettotaltime + ":0" + minute + " " + format);
+                                            }
                                         }else {
                                             ETTimeStart.setText(hourOfDay + ":" + minute + " " + format);
-                                        }
 
+                                            int gettotaltime = hourOfDay+addtime;
+
+                                            if (gettotaltime >= 10 ){
+                                                if (format.equals("PM") && minute > 0){
+                                                    Toast.makeText(AddScheduleActivity.this, "Sorry, the time end is later than our business time.", Toast.LENGTH_SHORT).show();
+                                                    ETTimeStart.setText("");
+                                                    ETTimeEnd.setText("");
+                                                } else {
+                                                    ETTimeEnd.setText(gettotaltime + ":" + minute + " " + format);
+                                                }
+                                            }else {
+                                                ETTimeEnd.setText(gettotaltime + ":" + minute + " " + format);
+                                            }
+                                        }
                                     }
                                 }, CalendarHour, CalendarMinute, false);
                         timepickerdialog.show();
                     }
                 });
-
-                ETTimeEnd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        calendar = Calendar.getInstance();
-                        CalendarHour = calendar.get(Calendar.HOUR_OF_DAY);
-                        CalendarMinute = calendar.get(Calendar.MINUTE);
-                        timepickerdialog = new TimePickerDialog(AddScheduleActivity.this,
-                                new TimePickerDialog.OnTimeSetListener() {
-                                    @Override
-                                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                                          int minute) {
-                                        if (hourOfDay == 0) {
-                                            hourOfDay += 12;
-                                            format = "AM";
-                                        }
-                                        else if (hourOfDay == 12) {
-
-                                            format = "PM";
-                                        }
-                                        else if (hourOfDay > 12) {
-                                            hourOfDay -= 12;
-                                            format = "PM";
-                                        }
-                                        else {
-
-                                            format = "AM";
-                                        }
-                                        if (minute < 10){
-                                            ETTimeEnd.setText(hourOfDay + ":0" + minute + " " + format);
-                                        }else {
-                                            ETTimeEnd.setText(hourOfDay + ":" + minute + " " + format);
-                                        }
-
-                                    }
-                                }, CalendarHour, CalendarMinute, false);
-                        timepickerdialog.show();
-                    }
-                });
-
                 btnAddSched.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         String getday = ETDay.getText().toString().trim();
                         String getInstructor = ETInstructorName.getText().toString().trim();
                         String getStartTime = ETTimeStart.getText().toString().trim();
                         String getEndTime = ETTimeEnd.getText().toString().trim();
+                        long timeNow = 0;
+                        Date date1;
+                        Date date2;
+                        long timelater = 0;
 
                         if (TextUtils.isEmpty(getday) ||
                                 TextUtils.isEmpty(getInstructor) ||
@@ -509,12 +511,28 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
                         }else {
 
+                            String anotherdate = getStartTime;
+                            String someDate = getEndTime;
+                            SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+
+                            try {
+
+                                date1 = sdf.parse(anotherdate);
+                                timeNow = date1.getTime();
+
+                                date2 = sdf.parse(someDate);
+                                timelater = date2.getTime();
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
 
                             FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
                             DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference(("SessionSchedule"));
                             String key = databaseReference2.child(getday).push().getKey();
 
-                            HashMap<String, String> HashString = new HashMap<String, String>();
+                            HashMap<String, String> HashString = new HashMap<String,String>();
                             HashString.put("SessionDay", getday);
                             HashString.put("SessionName", SessionName);
                             HashString.put("SessionCapacity", SessionCapacity);
@@ -523,6 +541,11 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                             HashString.put("TimeStart", getStartTime);
                             HashString.put("TimeEnd", getEndTime);
                             HashString.put("Key", key);
+                            HashString.put("TimeStartMillis", String.valueOf(timeNow));
+                            HashString.put("TimeEndMillis", String.valueOf(timelater));
+                            HashString.put("Attendees", "0");
+
+
 
 
 
