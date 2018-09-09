@@ -1,4 +1,4 @@
-package com.example.alihfight.alifightapp.Coach.Fragments;
+package com.example.alihfight.alifightapp.User.Fragments;
 
 
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SessionsFragment extends Fragment {
+public class SessionsUser extends Fragment {
 
-    private View view;
+    View view;
     private RecyclerView recyclerSessions;
     private DatabaseReference mDatabaseRef;
     private DatabaseReference childRef;
@@ -41,7 +41,7 @@ public class SessionsFragment extends Fragment {
     String userID;
     private Button btnfullsched;
 
-    public SessionsFragment() {
+    public SessionsUser() {
         // Required empty public constructor
     }
 
@@ -50,11 +50,10 @@ public class SessionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_sessions, container, false) ;
-
+        view = inflater.inflate(R.layout.fragment_sessions_user, container, false);
 
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerSessions = view.findViewById(R.id.recyclerCoachSessions);
+        recyclerSessions = view.findViewById(R.id.recyclerUsersSessions);
         recyclerSessions.setLayoutManager(linearLayoutManager);
 
         Calendar calendar = Calendar.getInstance();
@@ -105,20 +104,16 @@ public class SessionsFragment extends Fragment {
 
         }
 
-        btnfullsched = view.findViewById(R.id.BTNviewfullsched);
+        btnfullsched = view.findViewById(R.id.BTNviewfullschedUser);
         btnfullsched.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
             }
         });
 
         return view;
     }
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -127,12 +122,12 @@ public class SessionsFragment extends Fragment {
         userID = firebaseUser.getUid();
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference1.child("Coaches").child(userID).addValueEventListener(new ValueEventListener() {
+        databaseReference1.child("PaymentDetails").child(userID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
 
-                    String getFullN = dataSnapshot.child("FullName").getValue().toString();
+                    String getFullN = dataSnapshot.child("SessionName").getValue().toString();
 
                     FirebaseRecyclerAdapter<DataSession, SessionsViewHolder> firebaseRecyclerAdapter =
                             new FirebaseRecyclerAdapter<DataSession, SessionsViewHolder>(
@@ -140,7 +135,7 @@ public class SessionsFragment extends Fragment {
                                     DataSession.class,
                                     R.layout.sessions_listrow,
                                     SessionsViewHolder.class,
-                                    childRef.orderByChild("Instructor").equalTo(getFullN)
+                                    childRef.orderByChild("SessionName").equalTo(getFullN)
 
                             ) {
 
@@ -154,7 +149,46 @@ public class SessionsFragment extends Fragment {
                                     viewHolder.TVSesTimeStart.setText(model.getTimeStart());
                                     viewHolder.btnAttendees.setText(model.getAttendees()+"/"+model.getSessionCapacity());
 
-                                    viewHolder.btnattend.setVisibility(View.GONE);
+                                    final String getPackageCount = dataSnapshot.child("Package").getValue().toString();
+
+
+                                    viewHolder.btnattend.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            DatabaseReference retrieveUserInfo = FirebaseDatabase.getInstance().getReference("users");
+
+                                            retrieveUserInfo.child(userID).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.exists()){
+                                                        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Attendees");
+                                                        String key = databaseReference2.child(model.getSessionName()).child(model.getKey()).push().getKey();
+
+
+                                                        HashMap<String, String> HashString = new HashMap<String,String>();
+                                                        HashString.put("Fullname", dataSnapshot.child("FirstName").getValue().toString()+" "+dataSnapshot.child("LastName").getValue().toString());
+                                                        HashString.put("PackageCount", getPackageCount);
+                                                        HashString.put("UserID", userID);
+                                                        HashString.put("Key", key);
+
+
+
+                                                         databaseReference2.child(model.getSessionName())
+                                                                          .child(model.getKey())
+                                                                          .child(key)
+                                                                          .setValue(HashString);
+
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+                                        }
+                                    });
 
                                     viewHolder.view.setOnClickListener(new View.OnClickListener() {
                                         @Override

@@ -10,7 +10,7 @@ import com.example.alihfight.alifightapp.R;
 public class SessionsViewHolder extends RecyclerView.ViewHolder {
 
     public TextView TVSesName, TVSesInstruct, TVSesTimeStart, TVSesTimeEnd, TVSesDay;
-    public Button btnAttendees;
+    public Button btnAttendees,btnattend;
     public View view;
 
 
@@ -23,5 +23,6 @@ public class SessionsViewHolder extends RecyclerView.ViewHolder {
         TVSesTimeEnd = itemView.findViewById(R.id.TVSessionEndFS);
         TVSesDay = itemView.findViewById(R.id.TVSessionDayFS);
         btnAttendees = itemView.findViewById(R.id.BTNAttendees);
+        btnattend = itemView.findViewById(R.id.btnAttend);
     }
 }
