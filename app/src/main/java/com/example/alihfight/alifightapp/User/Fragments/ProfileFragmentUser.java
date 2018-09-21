@@ -1,13 +1,16 @@
 package com.example.alihfight.alifightapp.User.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.alihfight.alifightapp.AvailMemberShipActivity;
 import com.example.alihfight.alifightapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +33,7 @@ public class ProfileFragmentUser extends Fragment {
     DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     public String userID;
+    private Button btnNewMem;
 
 
     public ProfileFragmentUser() {
@@ -52,6 +56,7 @@ public class ProfileFragmentUser extends Fragment {
         sessiontext = view.findViewById(R.id.TVSessionProfile);
         sessionslefttext = view.findViewById(R.id.TVSessionsLeftProfile);
 
+        btnNewMem = view.findViewById(R.id.btnAvailNewMem);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -59,6 +64,14 @@ public class ProfileFragmentUser extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
 
+        btnNewMem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AvailMemberShipActivity.class)
+                            .putExtra("Id", userID)
+                            .putExtra("Identifier", "Renew"));
+            }
+        });
         return view;
     }
 
@@ -70,6 +83,7 @@ public class ProfileFragmentUser extends Fragment {
         databaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 nametext.setText(dataSnapshot.child("FirstName").getValue().toString() + " " +dataSnapshot.child("LastName").getValue().toString());
                 agetext.setText(dataSnapshot.child("Age").getValue().toString());
                 sextext.setText(dataSnapshot.child("Gender").getValue().toString());
@@ -86,7 +100,7 @@ public class ProfileFragmentUser extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         sessiontext.setText(dataSnapshot.child("SessionName").getValue().toString());
-                        sessionslefttext.setText(dataSnapshot.child("Package").getValue().toString());
+                        sessionslefttext.setText(dataSnapshot.child("SessionCount").getValue().toString()+" Sessions");
                     }
 
                     @Override

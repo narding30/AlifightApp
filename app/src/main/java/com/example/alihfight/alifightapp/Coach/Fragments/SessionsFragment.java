@@ -145,14 +145,34 @@ public class SessionsFragment extends Fragment {
                             ) {
 
                                 @Override
-                                protected void populateViewHolder(SessionsViewHolder viewHolder, final DataSession model, int position) {
+                                protected void populateViewHolder(final SessionsViewHolder viewHolder, final DataSession model, int position) {
 
                                     viewHolder.TVSesName.setText(model.getSessionName());
                                     viewHolder.TVSesDay.setText(model.getSessionDay());
                                     viewHolder.TVSesInstruct.setText(model.getInstructor());
                                     viewHolder.TVSesTimeEnd.setText(model.getTimeEnd());
                                     viewHolder.TVSesTimeStart.setText(model.getTimeStart());
-                                    viewHolder.btnAttendees.setText(model.getAttendees()+"/"+model.getSessionCapacity());
+
+
+                                    DatabaseReference databaseReference4 = FirebaseDatabase.getInstance().getReference("Attendees");
+
+                                    databaseReference4.child(model.getSessionName())
+                                            .child(model.getKey()).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()){
+                                                int size = (int) dataSnapshot.getChildrenCount();
+                                                viewHolder.btnAttendees.setText(size+"/"+model.getSessionCapacity());
+                                            }else{
+                                                viewHolder.btnAttendees.setText("0/"+model.getSessionCapacity());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
 
                                     viewHolder.btnattend.setVisibility(View.GONE);
 
@@ -162,6 +182,8 @@ public class SessionsFragment extends Fragment {
 
                                             Intent intent = new Intent(getContext(), DetailedSched.class);
                                             intent.putExtra("Key", model.getKey());
+                                            intent.putExtra("SessionName", model.getSessionName());
+                                            intent.putExtra("Day", model.getSessionDay());
                                             startActivity(intent);
                                         }
                                     });

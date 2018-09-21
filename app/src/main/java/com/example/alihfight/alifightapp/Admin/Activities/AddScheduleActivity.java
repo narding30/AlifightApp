@@ -201,7 +201,6 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
 
                             }
                         });
-
                     }
                 };
         recyclerViewScheds.setAdapter(firebaseRecyclerAdapter);
@@ -347,6 +346,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.BTNAddSchedule:
+
                 final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.custom_addsched, null);
@@ -358,19 +358,13 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 final EditText ETTimeEnd = dialogView.findViewById(R.id.ETEndTime);
 
                 Button btnAddSched = dialogView.findViewById(R.id.btnSaveSched);
-                String getETTimeStart = ETTimeStart.getText().toString();
-                String getETTimeEnd = ETTimeEnd.getText().toString();
-                if (!TextUtils.isEmpty(getETTimeStart )&& !TextUtils.isEmpty(getETTimeEnd)){
-
-                }
-
-
 
                 final AlertDialog dialog = dialogBuilder.create();
 
                 ETInstructorName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Coaches");
 
                         databaseReference.orderByChild("SessionInstructor").equalTo(SessionName).addValueEventListener(new ValueEventListener() {
@@ -544,10 +538,6 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                             HashString.put("TimeStartMillis", String.valueOf(timeNow));
                             HashString.put("TimeEndMillis", String.valueOf(timelater));
                             HashString.put("Attendees", "0");
-
-
-
-
 
 
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(SessionName+"DaysSched");

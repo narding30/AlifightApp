@@ -6,17 +6,27 @@ public class DataAttendees {
     private String PackageCount;
     private String UserID;
     private String Key;
+    private String SessionsCount;
 
 
     public DataAttendees(){
 
     }
 
-    public DataAttendees(String Fullname, String PackageCount, String UserID, String Key){
+    public DataAttendees(String Fullname, String PackageCount, String UserID, String Key, String SessionsCount){
         this.Fullname = Fullname;
         this.PackageCount = PackageCount;
         this.UserID = UserID;
         this.Key = Key;
+        this.SessionsCount = SessionsCount;
+    }
+
+    public String getSessionsCount() {
+        return SessionsCount;
+    }
+
+    public void setSessionsCount(String sessionsCount) {
+        SessionsCount = sessionsCount;
     }
 
     public String getFullname() {

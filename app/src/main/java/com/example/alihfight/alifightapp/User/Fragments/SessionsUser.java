@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.alihfight.alifightapp.Coach.Activities.DetailedSched;
 import com.example.alihfight.alifightapp.Coach.Datas.DataSession;
@@ -27,9 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class SessionsUser extends Fragment {
 
     View view;
@@ -44,7 +43,6 @@ public class SessionsUser extends Fragment {
     public SessionsUser() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,6 +112,7 @@ public class SessionsUser extends Fragment {
 
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -128,6 +127,9 @@ public class SessionsUser extends Fragment {
                 if (dataSnapshot.exists()){
 
                     String getFullN = dataSnapshot.child("SessionName").getValue().toString();
+                    String getSessionCOunt = dataSnapshot.child("SessionCount").getValue().toString();
+
+                     final int SessionsToInt = Integer.valueOf(getSessionCOunt);
 
                     FirebaseRecyclerAdapter<DataSession, SessionsViewHolder> firebaseRecyclerAdapter =
                             new FirebaseRecyclerAdapter<DataSession, SessionsViewHolder>(
@@ -140,7 +142,7 @@ public class SessionsUser extends Fragment {
                             ) {
 
                                 @Override
-                                protected void populateViewHolder(SessionsViewHolder viewHolder, final DataSession model, int position) {
+                                protected void populateViewHolder(final SessionsViewHolder viewHolder, final DataSession model, int position) {
 
                                     viewHolder.TVSesName.setText(model.getSessionName());
                                     viewHolder.TVSesDay.setText(model.getSessionDay());
@@ -149,7 +151,27 @@ public class SessionsUser extends Fragment {
                                     viewHolder.TVSesTimeStart.setText(model.getTimeStart());
                                     viewHolder.btnAttendees.setText(model.getAttendees()+"/"+model.getSessionCapacity());
 
-                                    final String getPackageCount = dataSnapshot.child("Package").getValue().toString();
+
+
+                                    DatabaseReference databaseReference4 = FirebaseDatabase.getInstance().getReference("Attendees");
+
+                                    databaseReference4.child(model.getSessionName())
+                                            .child(model.getKey()).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()){
+                                                int size = (int) dataSnapshot.getChildrenCount();
+                                                viewHolder.btnAttendees.setText(size+"/"+model.getSessionCapacity());
+                                            }else{
+                                                viewHolder.btnAttendees.setText("0/"+model.getSessionCapacity());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
 
 
                                     viewHolder.btnattend.setOnClickListener(new View.OnClickListener() {
@@ -161,23 +183,78 @@ public class SessionsUser extends Fragment {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     if (dataSnapshot.exists()){
-                                                        DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Attendees");
-                                                        String key = databaseReference2.child(model.getSessionName()).child(model.getKey()).push().getKey();
+
+                                                        final String getFullname = dataSnapshot.child("FirstName").getValue().toString()+" "+dataSnapshot.child("LastName").getValue().toString();
+
+                                                        DatabaseReference databaseReference5 = FirebaseDatabase.getInstance().getReference("Attendees");
+
+                                                        databaseReference5.child(model.getSessionName())
+                                                                .child(model.getKey()).orderByChild("UserID").equalTo(userID).addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                if (dataSnapshot.exists()){
+                                                                    Toast.makeText(getContext(), "You already have clicked to attend this session.", Toast.LENGTH_SHORT).show();
+                                                                }else if(SessionsToInt <= 0){
+                                                                    Toast.makeText(getContext(), "You don't have enough session count to Attend this session. ", Toast.LENGTH_SHORT).show();
+                                                                } else {
+                                                                    DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("Attendees");
+                                                                    String key = databaseReference2.child(model.getSessionName()).child(model.getKey()).push().getKey();
+
+                                                                    int getTotalSession = SessionsToInt - 1;
+
+                                                                    HashMap<String, String> HashString = new HashMap<String,String>();
+                                                                    HashString.put("Fullname", getFullname);
+                                                                    HashString.put("PackageCount", String.valueOf(getTotalSession));
+                                                                    HashString.put("UserID", userID);
+                                                                    HashString.put("Key", key);
+
+                                                                    DatabaseReference databaseReference3 = FirebaseDatabase.getInstance().getReference("PaymentDetails");
+
+                                                                    databaseReference3.child(userID).child("SessionCount")
+                                                                            .setValue(getTotalSession);
 
 
-                                                        HashMap<String, String> HashString = new HashMap<String,String>();
-                                                        HashString.put("Fullname", dataSnapshot.child("FirstName").getValue().toString()+" "+dataSnapshot.child("LastName").getValue().toString());
-                                                        HashString.put("PackageCount", getPackageCount);
-                                                        HashString.put("UserID", userID);
-                                                        HashString.put("Key", key);
+                                                                    databaseReference2.child(model.getSessionName())
+                                                                            .child(model.getKey())
+                                                                            .child(key)
+                                                                            .setValue(HashString);
+
+                                                                    DatabaseReference saveToStats = FirebaseDatabase.getInstance().getReference("Statistics");
+
+                                                                    saveToStats.child(key)
+                                                                            .child("SessionName")
+                                                                            .setValue(model.getSessionName());
+
+
+                                                                    if (getTotalSession < 3){
+                                                                        DatabaseReference notifynomoreSessions = FirebaseDatabase.getInstance().getReference("NotifUser");
+                                                                        DatabaseReference NotifAdmin = FirebaseDatabase.getInstance().getReference("NotifAdmin");
+
+                                                                        String makeKey = notifynomoreSessions.child(userID).push().getKey();
+
+                                                                        HashMap<String, String> HashString1 = new HashMap<String,String>();
+                                                                        HashString1.put("Fullname", getFullname);
+                                                                        HashString1.put("Key", makeKey);
+                                                                        HashString1.put("UserID", userID);
+                                                                        HashString1.put("NotifStatus", "unread");
+
+                                                                        notifynomoreSessions.child(userID)
+                                                                                .child(makeKey)
+                                                                                .setValue(HashString1);
 
 
 
-                                                         databaseReference2.child(model.getSessionName())
-                                                                          .child(model.getKey())
-                                                                          .child(key)
-                                                                          .setValue(HashString);
+                                                                        NotifAdmin.child(makeKey)
+                                                                                .setValue(HashString1);
+                                                                    }
+                                                                }
+                                                            }
 
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
                                                     }
                                                 }
 
@@ -196,6 +273,8 @@ public class SessionsUser extends Fragment {
 
                                             Intent intent = new Intent(getContext(), DetailedSched.class);
                                             intent.putExtra("Key", model.getKey());
+                                            intent.putExtra("SessionName", model.getSessionName());
+                                            intent.putExtra("Day", model.getSessionDay());
                                             startActivity(intent);
                                         }
                                     });

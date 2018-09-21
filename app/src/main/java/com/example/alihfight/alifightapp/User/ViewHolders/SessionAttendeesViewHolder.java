@@ -10,8 +10,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SessionAttendeesViewHolder extends RecyclerView.ViewHolder {
 
-    CircleImageView CIAttendessImage;
-    TextView TVAttendeeName,TVAttendeeSessionLeft,TVAttendeeLastSession;
+    public CircleImageView CIAttendessImage;
+    public TextView TVAttendeeName,TVAttendeeSessionLeft;
 
     public SessionAttendeesViewHolder(View itemView) {
         super(itemView);
@@ -19,6 +19,5 @@ public class SessionAttendeesViewHolder extends RecyclerView.ViewHolder {
         CIAttendessImage = itemView.findViewById(R.id.CIAttendeesImage);
         TVAttendeeName = itemView.findViewById(R.id.TVAttendeesName);
         TVAttendeeSessionLeft = itemView.findViewById(R.id.TVAttendeesSessionLeft);
-        TVAttendeeLastSession = itemView.findViewById(R.id.TVAttendeesLastSessioned);
     }
 }

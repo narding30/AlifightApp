@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    >
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:padding="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/CIAttendeesImage"
         android:src="@drawable/russel"
@@ -27,38 +27,29 @@
            android:layout_height="wrap_content">
 
            <TextView
+
+               android:layout_marginTop="5dp"
+               android:visibility="visible"
                android:id="@+id/TVAttendeesName"
                android:textSize="18dp"
                android:textStyle="bold"
-               android:layout_marginLeft="10dp"
+               android:layout_marginLeft="15dp"
                android:text="Russel Crowe"
                android:textColor="@color/black"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content" />
 
            <TextView
+               android:visibility="visible"
                android:id="@+id/TVAttendeesSessionLeft"
                android:textSize="16dp"
                android:textStyle="bold"
-               android:layout_marginLeft="10dp"
+               android:layout_marginLeft="15dp"
                android:text="6 Sessions Left"
                android:textColor="@color/black"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content" />
-           <TextView
-               android:id="@+id/TVAttendeesLastSessioned"
-               android:textSize="13dp"
-               android:textStyle="bold"
-               android:layout_marginLeft="10dp"
-               android:text="Last Sessioned: Sept 2, 2018"
-               android:textColor="@color/black"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content" />
-
 
        </LinearLayout>
-
     </LinearLayout>
-
-
 </android.support.v7.widget.CardView>

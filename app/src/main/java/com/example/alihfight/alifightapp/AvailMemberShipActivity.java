@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,8 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alihfight.alifightapp.Admin.Activities.AddScheduleActivity;
+import com.example.alihfight.alifightapp.User.Activities.UserHomeActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -32,6 +39,7 @@ public class AvailMemberShipActivity extends AppCompatActivity {
     final Context context = this;
     EditText ETPackage;
     EditText ETSession;
+    String Identifier;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -52,6 +60,9 @@ public class AvailMemberShipActivity extends AppCompatActivity {
         ETSession = findViewById(R.id.ETSession);
 
         Id = getIntent().getStringExtra("Id");
+        Identifier = getIntent().getStringExtra("Identifier");
+
+
 
         ETPackage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,23 +121,33 @@ public class AvailMemberShipActivity extends AppCompatActivity {
                     final TextView total1 = dialog.findViewById(R.id.TVTotal);
                     TextView sessionfee = dialog.findViewById(R.id.TVsessionFee);
 
+                    final int CountSession;
                     final double packagepayment;
                     final double total;
                     if (getPackage.equals("8 Sessions")){
+
+                        CountSession = 8;
                         packagepayment = 1280.00;
                         total = packagepayment + 1000.00;
                         total1.setText(Double.toString(total));
                         sessionfee.setText(Double.toString(packagepayment));
+
                     }else if (getPackage.equals("10 Sessions")){
+
+                        CountSession = 10;
                         packagepayment = 1500.00;
                         total = packagepayment + 1000.00;
                         total1.setText(Double.toString(total));
                         sessionfee.setText(Double.toString(packagepayment));
+
                     }else {
+
+                        CountSession = 12;
                         packagepayment = 1680.00;
                         total = packagepayment + 1000.00;
                         total1.setText(Double.toString(total));
                         sessionfee.setText(Double.toString(packagepayment));
+
                     }
 
                     btnconfirm.setOnClickListener(new View.OnClickListener() {
@@ -136,24 +157,63 @@ public class AvailMemberShipActivity extends AppCompatActivity {
 
                             Toast.makeText(AvailMemberShipActivity.this, "Saving details....", Toast.LENGTH_SHORT).show();
 
-                            HashMap<String, String> HashString = new HashMap<String, String>();
-                            HashString.put("Package", getPackage);
-                            HashString.put("SessionName", getSession);
-                            HashString.put("PackagePayment", String.valueOf(packagepayment));
-                            HashString.put("TotalPayment", String.valueOf(total));
+                            if (Identifier.equals("New")){
+                                HashMap<String, String> HashString = new HashMap<String, String>();
+                                HashString.put("Package", getPackage);
+                                HashString.put("SessionName", getSession);
+                                HashString.put("PackagePayment", String.valueOf(packagepayment));
+                                HashString.put("TotalPayment", String.valueOf(total));
+                                HashString.put("SessionCount", String.valueOf(CountSession));
 
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PendingMembers").child(Id);
-                            databaseReference.setValue(hashMap);
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PendingMembers").child(Id);
+                                databaseReference.setValue(hashMap);
 
-                            DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("users").child(Id);
-                            databaseReference1.setValue(hashMap);
+                                DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("users").child(Id);
+                                databaseReference1.setValue(hashMap);
 
-                            DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("PaymentDetails").child(Id);
-                            databaseReference2.setValue(HashString);
+                                DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference("PaymentDetails").child(Id);
+                                databaseReference2.setValue(HashString);
 
 
-                            dialog.dismiss();
-                            startActivity(new Intent(AvailMemberShipActivity.this, MainActivity.class));
+                                dialog.dismiss();
+                                startActivity(new Intent(AvailMemberShipActivity.this, MainActivity.class));
+                            }else {
+
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PaymentDetails");
+
+                                databaseReference.child(Id).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()){
+                                            String SessionCount = dataSnapshot.child("SessionCount").getValue().toString();
+
+
+                                            int getTotalSession = CountSession + Integer.valueOf(SessionCount);
+
+                                            DatabaseReference saveNewValue = FirebaseDatabase.getInstance().getReference("PaymentDetails");
+
+                                            saveNewValue.child(Id)
+                                                    .child("SessionCount")
+                                                    .setValue(getTotalSession)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()){
+                                                        Toast.makeText(AvailMemberShipActivity.this, "Sucessfully Updated", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(AvailMemberShipActivity.this, UserHomeActivity.class));
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
                         }
                     });
                     dialog.show();

@@ -126,7 +126,9 @@ public class Registration extends AppCompatActivity {
                         mGender = "Female";
                         break;
                 }
+
             }
+
         });
     }
 
@@ -203,6 +205,7 @@ public class Registration extends AppCompatActivity {
                                 Intent intent = new Intent(Registration.this, AvailMemberShipActivity.class);
                                 intent.putExtra("usersData",User);
                                 intent.putExtra("Id",user_id);
+                                intent.putExtra("Identifier", "New");
                                 startActivity(intent);
 
                             }else {

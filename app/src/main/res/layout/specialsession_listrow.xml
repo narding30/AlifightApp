@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp"
+    tools:ignore="MissingPrefix"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="193dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TVSPSessionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muay Thai"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/TVSPSessionInstructor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Philip Mandi"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TVSPSessionDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friday"
+                android:textSize="16dp" />
+
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Appointed by "
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/TVSPFullName"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1:00 PM"
+                android:textSize="16dp" />
+
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Session Time"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/TVSPSessionTime"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1:00 PM"
+                android:textSize="16dp" />
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Session Status"
+                android:textSize="16dp" />
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/TVSPStatus"
+                android:textColor="#688e56"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Approved"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:src="@drawable/background"
+            android:layout_margin="10dp"
+            android:layout_gravity="right"
+            android:layout_width="130dp"
+            android:layout_height="130dp" />
+    </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnReappoint"
+                android:text="reappoint"
+                android:background="@color/black"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnApproved"
+                android:textColor="@color/white"
+                android:text="Approve"
+                android:background="#4f935c"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnDecline"
+                android:textColor="@color/white"
+                android:text="Decline"
+                android:background="#84191e"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
